@@ -1,0 +1,20 @@
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export function middleware(req: NextRequest) {
+  const token = req.cookies.get("admin-auth")?.value;
+  const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
+
+  if (!isAdminRoute) return NextResponse.next();
+
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  // Don't verify JWT here on Edge
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/admin/:path*"],
+};

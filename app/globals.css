@@ -1,26 +1,168 @@
-@import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ===== Admin Layout Wrapper ===== */
+.admin-layout {
+  display: flex;          /* 🔥 THIS FIXES EVERYTHING */
+  min-height: 100vh;
+  background-color: #f5f6fa;
+}
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  width: 220px;
+  background-color: #111827; /* dark slate */
+  color: #e5e7eb;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.sidebar.collapsed {
+  width: 70px;
+  align-items: center;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.sidebar-header {
+  display: flex;                  /* horizontal alignment */
+  align-items: center;
+  justify-content: flex-start; /* push button left/right or spacing */
+  height: 60px;                   /* fixed header height */
+  padding: 0 1px;
+  margin-bottom: 10px;
+}
+/* Non-collapsed version: keep everything shifted left */
+.sidebar-header .sidebar-title {
+  margin-left: 20px;        /* spacing between toggle and title */
+}
+
+.sidebar-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  margin: 0;                      /* remove extra margins */
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: #e5e7eb;
+  font-size: 1.2rem;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;            /* vertically center icon */
+  justify-content: center;        /* horizontally center icon */
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+  background-color: #1f2937;
+  color: white;
+}
+
+
+.sidebar.collapsed .sidebar-title {
+  display: none;
+}
+
+
+/* =========================
+   SIDEBAR LINKS
+========================= */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover */
+.sidebar-link:hover {
+  background-color: #1f2937;
+  color: white;
+}
+
+/* Active */
+.sidebar-link.active {
+  background-color: #1f2937;
+  color: white;
+  font-weight: 600;
+}
+
+/* Icon only when collapsed */
+.sidebar.collapsed .sidebar-link span {
+  display: none;
+}
+/* =========================
+   TOP NAVBAR
+========================= */
+.navbar {
+  height: 60px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+/* Navbar title */
+.navbar-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Navbar actions */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Logout button */
+.logout-btn {
+  padding: 6px 14px;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  height: 35px;
+}
+
+.logout-btn:hover {
+  background-color: #dc2626;
+}
+/* =========================
+   MAIN CONTENT
+========================= */
+.main-content {
+  flex: 1;
+  background-color: #f5f6fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  padding: 20px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f6fa;
 }
