@@ -20,7 +20,7 @@ type Product = {
   category: string;
 };
 
-const COLORS = ["#3DC8E0", "#539EE0", "#94A5E0","#B08BE0", "#8E84E0"];
+const COLORS = ["#C8B4F4", "#929CEA", "#6F98EA","#5EACEB", "#6ED0EA", "#75DBCF", "#8BEBB8"];
 const renderPercentageLabel = ({
  cx,
  cy,

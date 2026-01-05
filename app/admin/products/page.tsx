@@ -23,7 +23,7 @@ type Product = {
   image?: string;
 };
 
-const CATEGORIES = ["All", "Electronics", "Clothing", "Grocery", "Furniture", "Toys"];
+const CATEGORIES = ["All", "Electronics", "Fashion", "Beauty & care", "Grocery", "Furniture", "Toys", "Others"];
 
 export default function ProductsPage() {
   const [name, setName] = useState("");

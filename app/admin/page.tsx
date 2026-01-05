@@ -56,7 +56,7 @@ export default async function AdminDashboard() {
 
       {/* Summary Cards */}
       <div style={cardGrid}>
-        <Card title="Total Categories" value={5} />
+        <Card title="Total Categories" value={7} />
         <Card title="Total Products" value={totalProducts} />
         <Card title="Low Stock Items" value={lowStockCount} />
         <Card title="Total Inventory Value" value={inventoryValue} prefix="₹" />
