@@ -23,7 +23,6 @@ export default function AdminLayout({
 
   return (
     <div className="admin-layout">
-      {/* Sidebar */}
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="sidebar-header">
           <button
@@ -75,9 +74,7 @@ export default function AdminLayout({
 
       </aside>
 
-      {/* Main Area */}
       <div className="main-content">
-        {/* Top Navbar */}
         <header className="navbar">
           <div className="navbar-title"></div>
 
@@ -86,7 +83,6 @@ export default function AdminLayout({
           </div>
         </header>
 
-        {/* Page Content */}
         <div className="page-content">{children}</div>
       </div>
     </div>

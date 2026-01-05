@@ -4,7 +4,6 @@ import Admin from "@/app/models/Admin";
 import { requireAdmin } from "@/app/lib/requireAdmin";
 import bcrypt from "bcryptjs";
 
-/* -------- GET: List admins -------- */
 export async function GET() {
   try {
     requireAdmin();
@@ -20,7 +19,6 @@ export async function GET() {
   }
 }
 
-/* -------- POST: Create admin -------- */
 export async function POST(req: Request) {
   try {
     requireAdmin();

@@ -23,7 +23,7 @@ export const productSchema = z.object({
     .string()
     .url("Invalid image URL")
     .optional()
-    .or(z.literal("")), // ✅ allow empty string
+    .or(z.literal("")), 
 });
 
 export type ProductInput = z.infer<typeof productSchema>;

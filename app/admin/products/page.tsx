@@ -3,6 +3,7 @@
 import { useState } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import "./page.css";
 
 const fetcher = (url: string) =>
@@ -32,29 +33,36 @@ export default function ProductsPage() {
   const [category, setCategory] = useState("");
   const [filterCategory, setFilterCategory] = useState("All");
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState(search);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [editId, setEditId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const router = useRouter();
   const limit = 5;
 
-  const { data, mutate } = useSWR(
-    `/api/products?page=${page}&limit=${limit}`,
-    fetcher
+  useEffect(() => {
+    setPage(1);
+  }, [search, filterCategory]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [search]);
+
+  const { data, mutate  } = useSWR(
+    `/api/products?page=${page}&limit=${limit}&search=${debouncedSearch}&category=${filterCategory}`,
+    fetcher,
+    {
+      keepPreviousData: true,
+      revalidateOnFocus: false,
+    }
   );
 
   const products: Product[] = data?.products || [];
   const totalPages = data?.totalPages || 1;
-
-  const filteredProducts = products.filter((p) => {
-    const matchesSearch = p.name
-      .toLowerCase()
-      .includes(search.toLowerCase());
-    const matchesCategory =
-      filterCategory === "All" || p.category === filterCategory;
-
-    return matchesSearch && matchesCategory;
-  });
+ 
 
   async function addOrUpdate() {
     if (!name || !price || !stock || !category) {
@@ -142,15 +150,15 @@ export default function ProductsPage() {
       <p style={{ color: "#565c67ff", marginBottom: "1px" }}>
         Add, update & maintain product records
       </p>
-      <hr
-  style={{
-    border: "none",
-    borderTop: "1px solid #e5e7eb", // light gray
-    margin: "8px 0 20px 0",
-  }}
-/>
 
-      {/* Product Form */}
+      <hr
+      style={{
+        border: "none",
+        borderTop: "1px solid #e5e7eb", 
+        margin: "8px 0 20px 0",
+      }}
+      />
+
       <div className="form">
         <input
           type="text"
@@ -181,7 +189,6 @@ export default function ProductsPage() {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           style={{
-
             flex: "1 1 150px",
             padding: "0.5rem",
             border: "1px solid #d1d5db",
@@ -198,44 +205,42 @@ export default function ProductsPage() {
           ))}
         </select>
 
-       
-  <input
-    type="file"
-    accept="image/*"
-    onChange={(e) =>
-      setImageFile(e.target.files ? e.target.files[0] : null)
-    }
-    
-  />
-
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) =>
+          setImageFile(e.target.files ? e.target.files[0] : null)
+          }
+        />
 
         <button onClick={addOrUpdate}>
           {editId ? "Update Product" : "Add Product"}
         </button>
       </div>
-      <hr
-  style={{
-    border: "none",
-    borderTop: "1px solid #e5e7eb", // light gray
-    margin: "8px 0 20px 0",
-  }}
-/>
 
-        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 600, marginBottom: "6px" }}>
-        Product Records
+      <hr
+      style={{
+        border: "none",
+        borderTop: "1px solid #e5e7eb", 
+        margin: "8px 0 20px 0",
+      }}
+      />
+
+      <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: 600, marginBottom: "6px" }}>
+      Product Records
       </h1>
       <p style={{ color: "#565c67ff", marginBottom: "2px" }}>
-        Searchable product information
+      Searchable product information
       </p>
-      <hr
-  style={{
-    border: "none",
-    borderTop: "1px solid #e5e7eb", // light gray
-    margin: "8px 0 20px 0",
-  }}
-/>
 
-      {/* Search + Category Filter */}
+      <hr
+      style={{
+        border: "none",
+        borderTop: "1px solid #e5e7eb", 
+        margin: "8px 0 20px 0",
+      }}
+      />
+
       <div style={{ display: "flex", gap: "12px", marginBottom: "20px" }}>
         <input
           placeholder="Search products"
@@ -255,17 +260,17 @@ export default function ProductsPage() {
           ))}
         </select>
       </div>
-     <hr
-  style={{
-    border: "none",
-    borderTop: "1px solid #e5e7eb", // light gray
-    margin: "8px 0 20px 0",
-  }}
-/> 
 
-      {/* Product List */}
+      <hr
+      style={{
+        border: "none",
+        borderTop: "1px solid #e5e7eb", 
+        margin: "8px 0 20px 0",
+      }}
+      /> 
+
       <ul className="product-list">
-        {filteredProducts.map((p) => (
+        {products.map((p) => (
           <li key={p._id} className="product-item">
             {p.image && <img src={p.image} alt={p.name} />}
 
@@ -290,18 +295,18 @@ export default function ProductsPage() {
               Delete
               </button>
             </div>
-
           </li>
         ))}
       </ul>
+
       <hr
-  style={{
-    border: "none",
-    borderTop: "1px solid #e5e7eb", // light gray
-    margin: "20px 0 20px 0",
-  }}
-/> 
-      {/* Pagination */}
+      style={{
+        border: "none",
+        borderTop: "1px solid #e5e7eb", 
+        margin: "20px 0 20px 0",
+      }}
+      /> 
+
       <div className="pagination">
         <button disabled={page === 1} onClick={() => setPage(page - 1)}>
           Prev
@@ -317,9 +322,10 @@ export default function ProductsPage() {
         </button>
       </div>
     </div>
-    </div>
+  </div>
   );
 }
+
 const categorySelect = {
   height: "42px",
   padding: "0 12px",

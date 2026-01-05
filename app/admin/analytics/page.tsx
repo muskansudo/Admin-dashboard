@@ -17,9 +17,9 @@ async function getAnalyticsData() {
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/analytics`,
     {
       headers: {
-        Cookie: cookieStore.toString(), // 👈 required
+        Cookie: cookieStore.toString(), 
       },
-      cache: "no-store", // true SSR
+      cache: "no-store", 
     }
   );
   if (res.status === 401 || res.status === 403) {
@@ -44,7 +44,6 @@ export default async function AnalyticsPage() {
         Track stock trends, low inventory, and key metrics
       </p>
 
-      {/* 👇 Client-only charts */}
       <AnalyticsCharts products={products} />
     </div>
   );

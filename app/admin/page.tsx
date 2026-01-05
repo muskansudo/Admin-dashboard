@@ -7,7 +7,7 @@ type Product = {
   price: number;
   category: string;
   stock: number;
-  image?: string; // optional image URL
+  image?: string; 
 };
 
 async function getDashboardData(): Promise<Product[]> {
@@ -17,7 +17,7 @@ async function getDashboardData(): Promise<Product[]> {
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/home`,
     {
       headers: {
-        Cookie: cookieStore.toString(), // 👈 THIS is the fix
+        Cookie: cookieStore.toString(), 
       },
       cache: "no-store",
     }
@@ -54,7 +54,6 @@ export default async function AdminDashboard() {
         Store Overview, Inventory & Key Metrics
       </p>
 
-      {/* Summary Cards */}
       <div style={cardGrid}>
         <Card title="Total Categories" value={7} />
         <Card title="Total Products" value={totalProducts} />
@@ -62,7 +61,6 @@ export default async function AdminDashboard() {
         <Card title="Total Inventory Value" value={inventoryValue} prefix="₹" />
       </div>
 
-      {/* Low Stock Alerts */}
       {lowStockCount > 0 && (
         <div style={alertCard}>
           <h2 style={alertTitle}>⚠ Low Stock Alerts</h2>
@@ -77,74 +75,68 @@ export default async function AdminDashboard() {
         </div>
       )}
 
-      {/* Product List */}
-<div style={box}>
-  <h2
-    style={{
-      fontFamily: "'Playfair Display', serif",
-      color: "#2f3237ff",
-      marginBottom: "20px",
-    }}
-  >
-    Product Inventory
-  </h2>
+      <div style={box}>
+        <h2
+        style={{
+          fontFamily: "'Playfair Display', serif",
+          color: "#2f3237ff",
+          marginBottom: "20px",
+        }}
+        >
+        Product Inventory
+        </h2>
 
-  <table style={table}>
-    <thead>
-      <tr style={{ background: "#f9fafb" }}>
-        <th style={{...th, padding: "12px 23px"}}>Image</th>
-        <th style={th}>Name</th>
-        <th style={th}>Category</th>
-        <th style={th}>Price</th>
-        <th style={th}>Stock</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {products.map((p) => (
-        <tr key={p._id}>
-          <td style={td}>
-            {p.image ? (
-              <img
-                src={p.image}
-                alt={p.name}
+      <table style={table}>
+        <thead>
+          <tr style={{ background: "#f9fafb" }}>
+            <th style={{...th, padding: "12px 23px"}}>Image</th>
+            <th style={th}>Name</th>
+            <th style={th}>Category</th>
+            <th style={th}>Price</th>
+            <th style={th}>Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((p) => (
+            <tr key={p._id}>
+              <td style={td}>
+                {p.image ? (
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    style={{
+                      width: "75px",
+                      height: "70px",
+                      objectFit: "cover",
+                      borderRadius: "8px",
+                    }}
+                  />
+                ) : (
+                 <span style={{ paddingLeft: "25px" }}>—</span>
+                )}
+              </td>
+              <td style={td}>{p.name}</td>
+              <td style={td}>{p.category}</td>
+              <td style={td}>₹{p.price}</td>
+              <td
                 style={{
-                  width: "75px",
-                  height: "70px",
-                  objectFit: "cover",
-                  borderRadius: "8px",
+                  ...td,
+                  color: p.stock < 5 ? "#dc2626" : "#111827",
+                  fontWeight: p.stock < 5 ? 600 : 400,
                 }}
-              />
-            ) : (
-             <span style={{ paddingLeft: "25px" }}>—</span>
-            )}
-          </td>
-
-          <td style={td}>{p.name}</td>
-          <td style={td}>{p.category}</td>
-          <td style={td}>₹{p.price}</td>
-
-          <td
-            style={{
-              ...td,
-              color: p.stock < 5 ? "#dc2626" : "#111827",
-              fontWeight: p.stock < 5 ? 600 : 400,
-            }}
-          >
-            {p.stock}
-            {p.stock < 5 && " (LOW)"}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
+              >
+                {p.stock}
+                {p.stock < 5 && " (LOW)"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      </div>
     </div>
   );
 }
 
-/* ---------- Card Component ---------- */
 function Card({ title, value, prefix = "" }: { title: string; value: number; prefix?: string }) {
   return (
     <div style={card}>
@@ -156,7 +148,6 @@ function Card({ title, value, prefix = "" }: { title: string; value: number; pre
   );
 }
 
-/* ---------- Styles ---------- */
 const cardGrid = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",

@@ -51,11 +51,9 @@ const renderPercentageLabel = ({
 };
 
 export default function AnalyticsCharts({ products }: { products: Product[] }) {
-  /* ---------- Summary ---------- */
   const totalProducts = products.length;
   const totalStock = products.reduce((sum, p) => sum + p.stock, 0);
 
-  /* ---------- Category aggregation ---------- */
   const categoryStats = products.reduce<Record<
     string,
     { category: string; count: number; stock: number }
@@ -72,14 +70,12 @@ export default function AnalyticsCharts({ products }: { products: Product[] }) {
 
   return (
     <>
-      {/* Summary Cards */}
       <div style={cardGrid}>
         <Card title="Total Categories" value={7} />
         <Card title="Total Products" value={totalProducts} />
         <Card title="Total Stock Units" value={totalStock} />
       </div>
 
-      {/* Stock per Category */}
       <div style={chartBox}>
         <h2 style={heading}>Stock Distribution by Category</h2>
         <BarChart width={800} height={320} data={categoryData}>
@@ -90,7 +86,6 @@ export default function AnalyticsCharts({ products }: { products: Product[] }) {
         </BarChart>
       </div>
 
-      {/* Stock per Product */}
       <div style={chartBox}>
         <h2 style={heading}>Stock per Product</h2>
         <BarChart width={800} height={350} data={products}>
@@ -108,7 +103,6 @@ export default function AnalyticsCharts({ products }: { products: Product[] }) {
         </BarChart>
       </div>
 
-      {/* Products per Category */}
       <div style={chartBox}>
         <h2 style={heading}>Products per Category</h2>
         <PieChart width={800} height={320}>
@@ -134,7 +128,6 @@ export default function AnalyticsCharts({ products }: { products: Product[] }) {
   );
 }
 
-/* ---------- UI ---------- */
 function Card({ title, value }: { title: string; value: number }) {
   return (
     <div style={card}>

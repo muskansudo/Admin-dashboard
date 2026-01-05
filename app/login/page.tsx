@@ -55,8 +55,6 @@ export default function LoginPage() {
   );
 }
 
-/* ---------------- styles ---------------- */
-
 const container = {
   height: "100vh",
   display: "flex",

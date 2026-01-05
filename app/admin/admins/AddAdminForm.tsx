@@ -61,8 +61,6 @@ export default function AddAdminForm() {
   );
 }
 
-/* ---------------- styles ---------------- */
-
 const card: React.CSSProperties = {
   background: "white",
   padding: "20px",

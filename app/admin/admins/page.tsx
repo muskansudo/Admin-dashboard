@@ -15,7 +15,7 @@ async function getAdmins(): Promise<Admin[]> {
     {
       cache: "no-store",
       headers: {
-        Cookie: cookieStore.toString(), // ✅ forward auth cookie
+        Cookie: cookieStore.toString(), 
       },
     }
   );
@@ -31,7 +31,6 @@ async function getAdmins(): Promise<Admin[]> {
   return data.admins;
 }
 
-
 export default async function AdminsPage() {
   const admins = await getAdmins();
 
@@ -45,34 +44,30 @@ export default async function AdminsPage() {
         Administrator account creation and oversight
       </p>
 
-      {/* Client component for creating admin */}
       <AddAdminForm />
 
-      {/* Admin list */}
       <div style={box}>
         <h2 style={heading}>Existing Admin Emails</h2>
 
         <table style={table}>
-  <thead>
-    <tr>
-      <th style={th}></th>
-    </tr>
-  </thead>
-  <tbody>
-    {admins.map((a) => (
-      <tr key={a._id}>
-        <td style={td}>{a.email}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-
+          <thead>
+            <tr>
+              <th style={th}></th>
+            </tr>
+          </thead>
+          <tbody>
+            {admins.map((a) => (
+              <tr key={a._id}>
+                <td style={td}>{a.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
 }
 
-/* styles */
 const box = {
   background: "white",
   padding: "20px",

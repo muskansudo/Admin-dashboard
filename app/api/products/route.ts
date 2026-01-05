@@ -5,7 +5,6 @@ import cloudinary from "@/app/lib/cloudinary";
 import { requireAdmin } from "@/app/lib/requireAdmin";
 import { productSchema } from "@/app/lib/validators/product";
 
-/* ---------------- GET (pagination) ---------------- */
 export async function GET(req: Request) {
   try {
     requireAdmin();
@@ -15,13 +14,22 @@ export async function GET(req: Request) {
     const page = Number(searchParams.get("page")) || 1;
     const limit = Number(searchParams.get("limit")) || 5;
     const skip = (page - 1) * limit;
+    const search = searchParams.get("search") || "";
+    const category = searchParams.get("category") || "All";
+    const query: any = {};
 
-    const products = await Product.find()
-      .skip(skip)
-      .limit(limit)
-      .sort({ createdAt: -1 });
+    if (search) {
+      query.name = { $regex: search, $options: "i" };
+    }
+    if (category !== "All") {
+      query.category = category;
+    }
 
-    const total = await Product.countDocuments();
+    const products = await Product.find(query)
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: -1 });
+    const total = await Product.countDocuments(query);
 
     return NextResponse.json({
       products,
@@ -32,7 +40,6 @@ export async function GET(req: Request) {
   }
 }
 
-/* ---------------- POST (create product) ---------------- */
 export async function POST(req: Request) {
   try {
     requireAdmin();
@@ -40,7 +47,6 @@ export async function POST(req: Request) {
 
     const body = await req.json();
 
-    // ✅ Zod validation
     const validated = productSchema.parse(body);
 
     let imageUrl = "";
@@ -69,7 +75,6 @@ export async function POST(req: Request) {
   }
 }
 
-/* ---------------- PUT (update product) ---------------- */
 export async function PUT(req: Request) {
   try {
     requireAdmin();
@@ -84,7 +89,6 @@ export async function PUT(req: Request) {
 
     const body = await req.json();
 
-    // ✅ Partial validation for updates
     const validated = productSchema.partial().parse(body);
 
     let imageUrl: string | undefined;
@@ -117,7 +121,6 @@ export async function PUT(req: Request) {
   }
 }
 
-/* ---------------- DELETE ---------------- */
 export async function DELETE(req: Request) {
   try {
     requireAdmin();

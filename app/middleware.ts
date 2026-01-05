@@ -11,7 +11,6 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  // Don't verify JWT here on Edge
   return NextResponse.next();
 }
 

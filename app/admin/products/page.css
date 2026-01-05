@@ -1,8 +1,4 @@
-/* page.css */
 
-/* =========================
-   Dashboard container
-========================= */
 .dashboard {
   max-width: 900px;
   padding: 2rem;
@@ -12,9 +8,6 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* =========================
-   FORM
-========================= */
 .form {
   display: flex;
   flex-wrap: wrap;
@@ -23,7 +16,6 @@
   color: #818897
 }
 
-/* Inputs & selects */
 .form input[type="text"],
 .form input[type="number"],
 .form input[type="file"],
@@ -37,18 +29,16 @@
   font-size: 1rem;
   background-color: white;
   color: #111827;
-  caret-color: #4f46e5; /* blinking cursor */
+  caret-color: #4f46e5; 
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Placeholder text – more visible */
 input::placeholder {
   color: #818897;
   opacity: 1;
   font-weight: 500;
 }
 
-/* Focus state (Amazon / Nykaa glow ✨) */
 .form input:focus,
 .form select:focus,
 .dashboard input:focus {
@@ -56,16 +46,12 @@ input::placeholder {
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
-/* File input fix */
 .form input[type="file"] {
  padding: 0.45rem;
  align-items: center;
  color: #626773
 }
 
-
-
-/* Add / Update button */
 .form button {
   background: linear-gradient(135deg, #6366f1, #4f46e5);
   color: white;
@@ -82,17 +68,11 @@ input::placeholder {
   box-shadow: 0 6px 14px rgba(79, 70, 229, 0.35);
 }
 
-/* =========================
-   SEARCH + FILTER
-========================= */
 .dashboard input[placeholder="Search products"] {
   max-width: 320px;
   margin-bottom: 2px;
 }
 
-/* =========================
-   PRODUCT LIST
-========================= */
 .product-list {
   list-style: none;
   padding: 0;
@@ -114,13 +94,11 @@ input::placeholder {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Card hover effect */
 .product-item:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 24px rgba(0,0,0,0.14);
 }
 
-/* Product image */
 .product-item img {
   width: 180px;
   height: 180px;
@@ -130,7 +108,6 @@ input::placeholder {
   margin-bottom: 0.5rem;
 }
 
-/* Product text */
 .product-item strong {
   font-family: 'Playfair Display', serif;
   font-size: 1.2rem;
@@ -142,9 +119,6 @@ input::placeholder {
   color: #4b5563;
 }
 
-/* =========================
-   PRODUCT ACTION BUTTONS
-========================= */
 .product-item button {
   margin-top: 0.4rem;
   padding: 0.4rem 0.7rem;
@@ -156,7 +130,6 @@ input::placeholder {
   transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
-/* Edit */
 .edit-btn {
   background-color: #facc15;
   color: #111827;
@@ -167,7 +140,6 @@ input::placeholder {
   transform: translateY(-1px);
 }
 
-/* Delete */
 .delete-btn {
   background-color: #ef4444;
   color: white;
@@ -179,9 +151,6 @@ input::placeholder {
   transform: translateY(-1px);
 }
 
-/* =========================
-   PAGINATION
-========================= */
 .pagination {
   display: flex;
   justify-content: center;
@@ -214,16 +183,13 @@ input::placeholder {
   font-weight: 530;
   color: #111827;
 }
-/* ===== Admin Layout Wrapper ===== */
+
 .admin-layout {
-  display: flex;          /* 🔥 THIS FIXES EVERYTHING */
+  display: flex;          
   min-height: 100vh;
   background-color: #f5f6fa;
 }
 
-/* =========================
-   MAIN CONTENT
-========================= */
 .main-content {
   flex: 1;
   background-color: #f5f6fa;

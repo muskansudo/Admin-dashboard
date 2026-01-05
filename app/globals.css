@@ -1,16 +1,12 @@
-
-/* ===== Admin Layout Wrapper ===== */
 .admin-layout {
-  display: flex;          /* 🔥 THIS FIXES EVERYTHING */
+  display: flex;          
   min-height: 100vh;
   background-color: #f5f6fa;
 }
-/* =========================
-   SIDEBAR
-========================= */
+
 .sidebar {
   width: 220px;
-  background-color: #111827; /* dark slate */
+  background-color: #111827; 
   color: #e5e7eb;
   padding: 20px;
   display: flex;
@@ -24,16 +20,16 @@
 }
 
 .sidebar-header {
-  display: flex;                  /* horizontal alignment */
+  display: flex;                  
   align-items: center;
-  justify-content: flex-start; /* push button left/right or spacing */
-  height: 60px;                   /* fixed header height */
+  justify-content: flex-start;
+  height: 60px;                   
   padding: 0 1px;
   margin-bottom: 10px;
 }
-/* Non-collapsed version: keep everything shifted left */
+
 .sidebar-header .sidebar-title {
-  margin-left: 20px;        /* spacing between toggle and title */
+  margin-left: 20px;       
 }
 
 .sidebar-title {
@@ -41,7 +37,7 @@
   font-weight: 800;
   color: white;
   font-family: 'Playfair Display', serif;
-  margin: 0;                      /* remove extra margins */
+  margin: 0;                      
 }
 
 .sidebar-toggle {
@@ -53,8 +49,8 @@
   height: 40px;
   width: 40px;
   display: flex;
-  align-items: center;            /* vertically center icon */
-  justify-content: center;        /* horizontally center icon */
+  align-items: center;            
+  justify-content: center;       
   border-radius: 8px;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -64,15 +60,10 @@
   color: white;
 }
 
-
 .sidebar.collapsed .sidebar-title {
   display: none;
 }
 
-
-/* =========================
-   SIDEBAR LINKS
-========================= */
 .sidebar-link {
   display: flex;
   align-items: center;
@@ -86,26 +77,21 @@
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Hover */
 .sidebar-link:hover {
   background-color: #1f2937;
   color: white;
 }
 
-/* Active */
 .sidebar-link.active {
   background-color: #1f2937;
   color: white;
   font-weight: 600;
 }
 
-/* Icon only when collapsed */
 .sidebar.collapsed .sidebar-link span {
   display: none;
 }
-/* =========================
-   TOP NAVBAR
-========================= */
+
 .navbar {
   height: 60px;
   background-color: #ffffff;
@@ -116,21 +102,18 @@
   padding: 0 20px;
 }
 
-/* Navbar title */
 .navbar-title {
   font-size: 1rem;
   font-weight: 600;
   color: #111827;
 }
 
-/* Navbar actions */
 .navbar-actions {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-/* Logout button */
 .logout-btn {
   padding: 6px 14px;
   background-color: #ef4444;
@@ -146,9 +129,7 @@
 .logout-btn:hover {
   background-color: #dc2626;
 }
-/* =========================
-   MAIN CONTENT
-========================= */
+
 .main-content {
   flex: 1;
   background-color: #f5f6fa;
