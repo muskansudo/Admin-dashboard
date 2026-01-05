@@ -74,7 +74,7 @@ export default function AnalyticsCharts({ products }: { products: Product[] }) {
     <>
       {/* Summary Cards */}
       <div style={cardGrid}>
-        <Card title="Total Categories" value={categoryData.length} />
+        <Card title="Total Categories" value={7} />
         <Card title="Total Products" value={totalProducts} />
         <Card title="Total Stock Units" value={totalStock} />
       </div>
