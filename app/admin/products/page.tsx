@@ -6,14 +6,20 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import "./page.css";
 
-const fetcher = (url: string) =>
-  fetch(url, {
+const fetcher = async (url: string) => {
+  const res = await fetch(url, {
     credentials: "include",
-  }).then((res) => {
-    if (!res.ok) throw new Error("Unauthorized");
-    return res.json();
   });
+  if (res.status === 401 || res.status === 403) {
+    window.location.href = "/login";
+    return;
+  }
+  if (!res.ok) {
+    throw new Error("Failed to fetch");
+  }
 
+  return res.json();
+};
 
 type Product = {
   _id: string;
