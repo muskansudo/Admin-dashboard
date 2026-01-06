@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# SSR E-Commerce Product Management Dashboard
 
-First, run the development server:
+A **Server-Side Rendered (SSR) admin dashboard** for managing products, inventory, analytics, and admin users for an e-commerce platform.  
+Built with **Next.js App Router**, **MongoDB**, and **Cloudinary**, this dashboard demonstrates secure admin authentication, CRUD operations, global search, category filtering, pagination, and analytics.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+##  Features
+
+-  Server-Side Rendering (SSR) for fast page loads  
+-  Admin authentication & role-based access  
+   - Login page that only accepts admin credentials  
+   - Logout functionality to securely end admin sessions
+-  Sidebar navigation to access:  
+   - Product Management  
+   - Analytics  
+   - Admin Management  
+   - Homepage Overview
+-  Homepage overview showing key stats and product inventory
+-  Image upload via Cloudinary 
+-  Product Management (Add, Edit, Delete) using MongoDB  
+-  Global search with pagination across all pages  
+-  Category-based product filtering stored in MongoDB
+-  Admin user management saved in MongoDB 
+-  Analytics dashboard with product & stock insights  
+-  Deployed on Vercel  
+
+---
+
+##  Tech Stack
+
+- **Frontend & Backend**: Next.js (App Router, SSR)  
+- **Database**: MongoDB + Mongoose  
+- **Authentication**: Cookie-based admin authorization 
+- **Image Storage**: Cloudinary
+- **Data Visualization**: Recharts 
+- **Data Fetching**: SWR  
+- **Form Validation**: Zod  
+- **Deployment**: Vercel  
+
+---
+
+##  Dummy Admin Credentials
+
+Use these credentials to access the dashboard:
+
+```
+Email: admin_db@gmail.com
+Password: admin123
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+##  Live Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Dashboard URL:**  
+[https://admin-dashboard-x6tu.vercel.app/](https://admin-dashboard-x6tu.vercel.app/)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🎥 Demo Video
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Watch Demo (3–5 mins):**  
+[https://youtube.com/your-demo-link](https://youtube.com/your-demo-link)  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+*Shows login, homepage with overview, product CRUD, search, pagination, category filtering, analytics, admin management.*
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+##  Setup Instructions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 1️⃣ Clone Repository
+```bash
+git clone https://github.com/muskansudo/Admin-dashboard.git
+cd Admin-dashboard
+```
+
+### 2️⃣ Install Dependencies
+```bash
+npm install
+```
+
+### 3️⃣ Environment Variables
+
+Create a file named `.env.local` in the root directory and add the following values:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+NEXT_PUBLIC_BASE_URL=http://localhost:3000           # For production, set this to the deployed Vercel URL
+JWT_SECRET=your_jwt_secret_key
+```
+
+
+### 4️⃣ Run Development Server
+```bash
+npm run dev
+```
+
+### 5️⃣ Access the application
+Open your browser and go to: [http://localhost:3000](http://localhost:3000)
+
+---
+
+##  Project Structure
+```
+├── app/
+│   ├── api/
+│   │   ├── auth/                # Login, logout, JWT auth routes
+│   │   ├── products/            # Product CRUD, search, pagination
+│   │   ├── analytics/           # Dashboard analytics APIs
+│   │   ├── admins/              # Admin management APIs
+│   │   └── home/                # Homepage overview data 
+│   │
+│   ├── admin/                   
+│   │   ├── admins/               # Admin management UI 
+│   │   ├── products/             # Product management UI
+│   │   ├── analytics/            # Analytics UI
+│   │   ├── page.tsx              # Dashboard overview
+│   │   ├── AdminShell.tsx            
+│   │   └── layout.tsx
+│   │   
+│   ├── login/                   # Admin login page
+│   ├── layout.tsx               
+│   ├── globals.css
+│   ├── middleware.ts      
+│   └── page.tsx                 
+│
+├── app/lib/
+│   ├── db.ts                    # MongoDB connection
+│   ├── requireAdmin.ts          # Admin auth guard
+│   ├── cloudinary.ts            # Cloudinary config
+│   └── validators/              # Zod schemas
+│
+├── app/models/
+│   ├── Product.ts               # Product schema
+│   └── Admin.ts                 # Admin schema
+│
+├── README.md                    # Project documentation
+├── public/                      # Static assets
+├── .gitignore                   # Git ignored files
+├── package.json                 # Dependencies & scripts
+├── tsconfig.json                # TypeScript config
+├──...                           # Other files
+
+---
+```
+
