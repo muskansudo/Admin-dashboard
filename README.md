@@ -28,6 +28,22 @@ Built with **Next.js App Router**, **MongoDB**, and **Cloudinary**, this dashboa
 
 ---
 
+###  Rendering & SSR Details
+
+This dashboard is **SSR-first** with Next.js: pages fetch data on the server for fast, secure loads, while client-side interactivity is used only where needed (`use client`).  
+
+| Page | Rendering | Notes |
+|------|-----------|-------|
+| **Login** | Client | Interactive form for admin credentials. |
+| **Homepage / Overview** | Server | Pre-renders metrics & summaries securely. |
+| **Products** | Client | Interactive add/update/search; data via secure API. |
+| **Analytics** | Server + Client | Page SSR fetches analytics; charts render client-side. |
+| **Admin Management** | Server + Client | Admin list SSR; add admin form is client-side. |
+
+**Takeaway:** All sensitive data is fetched server-side, ensuring security & performance, while client-side is only for interactive components.
+
+---
+
 ##  Tech Stack
 
 - **Frontend & Backend**: Next.js (App Router, SSR)  
