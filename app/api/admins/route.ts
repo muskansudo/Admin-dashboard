@@ -1,8 +1,8 @@
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import connect from "@/app/lib/db";
 import Admin from "@/app/models/Admin";
 import { requireAdmin } from "@/app/lib/requireAdmin";
-export const dynamic = "force-dynamic";
 import bcrypt from "bcryptjs";
 
 export async function GET() {

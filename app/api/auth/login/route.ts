@@ -1,11 +1,9 @@
-"use server";
-
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import connect from "@/app/lib/db";
 import Admin from "@/app/models/Admin";
-export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   await connect();

@@ -1,7 +1,7 @@
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
-export const dynamic = "force-dynamic";
 
 export async function GET() {
   const token = cookies().get("admin-auth")?.value;
