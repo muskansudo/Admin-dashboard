@@ -4,6 +4,8 @@ import { useState } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useRef } from "react";
+
 import "./page.css";
 
 const fetcher = async (url: string) => {
@@ -44,6 +46,7 @@ export default function ProductsPage() {
   const [editId, setEditId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const limit = 5;
 
   useEffect(() => {
@@ -90,13 +93,22 @@ export default function ProductsPage() {
       });
     }
 
-    const body = {
+    const body: {
+      name: string;
+      price: number;
+      stock: number;
+      category: string;
+      image?: string;
+    } = {
       name,
       price: Number(price),
       stock: Number(stock),
       category,
-      image: imageBase64,
     };
+
+    if (imageFile) {
+      body.image = imageBase64;
+    }
 
     const url = editId ? `/api/products?id=${editId}` : "/api/products";
     const method = editId ? "PUT" : "POST";
@@ -115,6 +127,9 @@ export default function ProductsPage() {
     setCategory("");
     setImageFile(null);
     setEditId(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
 
     mutate();
     router.refresh();
@@ -212,12 +227,14 @@ export default function ProductsPage() {
         </select>
 
         <input
+          ref={fileInputRef}
           type="file"
           accept="image/*"
           onChange={(e) =>
           setImageFile(e.target.files ? e.target.files[0] : null)
-          }
+        }
         />
+
 
         <button onClick={addOrUpdate}>
           {editId ? "Update Product" : "Add Product"}
