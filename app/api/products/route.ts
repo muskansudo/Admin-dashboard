@@ -4,6 +4,7 @@ import Product from "@/app/models/Product";
 import cloudinary from "@/app/lib/cloudinary";
 import { requireAdmin } from "@/app/lib/requireAdmin";
 import { productSchema } from "@/app/lib/validators/product";
+export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
   try {

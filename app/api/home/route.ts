@@ -2,6 +2,7 @@ import connect from "@/app/lib/db";
 import Product from "@/app/models/Product";
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/app/lib/requireAdmin";
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
