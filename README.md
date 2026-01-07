@@ -75,12 +75,12 @@ Password: admin123
 
 ---
 
-## 🎥 Demo Video
+##  Demo Video
 
-**Watch Demo (3–5 mins):**  
-[https://youtube.com/your-demo-link](https://youtube.com/your-demo-link)  
+**Watch Demo Video (~5 min):**  
+[https://drive.google.com/file/d/1VnOIRckj-15ciSB2Sy3ECmdihnMsqZmb/view?usp=sharing](https://drive.google.com/file/d/1VnOIRckj-15ciSB2Sy3ECmdihnMsqZmb/view?usp=sharing)  
 
-*Shows login, homepage with overview, product CRUD, search, pagination, category filtering, analytics, admin management.*
+*Shows login, homepage with overview, product CRUD, search, pagination, category filtering, analytics, admin management and logout.*
 
 ---
 
